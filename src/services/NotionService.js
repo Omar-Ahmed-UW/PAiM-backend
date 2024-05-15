@@ -1,7 +1,14 @@
 const { Client } = require("@notionhq/client");
 const notion = new Client({ auth: process.env.NOTION_KEY });
 
-async function CreateNotionPage() {
+async function CreateNotionPage(
+    ideaName,
+    functionalitySection,
+    techStackSection,
+    archDescSection,
+    archDiagramSection,
+    milestonesSection
+) {
     console.log("this is my notion api key", process.env.NOTION_KEY);
     const response = await notion.pages.create({
         parent: {
@@ -14,13 +21,31 @@ async function CreateNotionPage() {
                     {
                         type: "text",
                         text: {
-                            content: "Hi from Notion API!",
+                            content: `🪄${ideaName}✨`,
                         },
                     },
                 ],
             },
         },
         children: [
+            {
+                //...other keys excluded
+                type: "heading_2",
+                //...other keys excluded
+                heading_2: {
+                    rich_text: [
+                        {
+                            type: "text",
+                            text: {
+                                content: "Functionality & Use Cases",
+                                link: null,
+                            },
+                        },
+                    ],
+                    color: "default",
+                    is_toggleable: false,
+                },
+            },
             {
                 object: "block",
                 type: "paragraph",
@@ -30,10 +55,97 @@ async function CreateNotionPage() {
                             type: "text",
                             text: {
                                 content:
-                                    "You made this page using the Notion API. Pretty cool, huh? We hope you enjoy building with us.",
+                                    functionalitySection ||
+                                    "No functionality provided",
                             },
                         },
                     ],
+                },
+            },
+            {
+                //...other keys excluded
+                type: "heading_2",
+                //...other keys excluded
+                heading_2: {
+                    rich_text: [
+                        {
+                            type: "text",
+                            text: {
+                                content: "Tech Stack",
+                                link: null,
+                            },
+                        },
+                    ],
+                    color: "default",
+                    is_toggleable: false,
+                },
+            },
+            {
+                object: "block",
+                type: "paragraph",
+                paragraph: {
+                    rich_text: [
+                        {
+                            type: "text",
+                            text: {
+                                content:
+                                    techStackSection ||
+                                    "No tech stack provided",
+                            },
+                        },
+                    ],
+                },
+            },
+            {
+                //...other keys excluded
+                type: "heading_2",
+                //...other keys excluded
+                heading_2: {
+                    rich_text: [
+                        {
+                            type: "text",
+                            text: {
+                                content: "Architecture Description",
+                                link: null,
+                            },
+                        },
+                    ],
+                    color: "default",
+                    is_toggleable: false,
+                },
+            },
+            {
+                object: "block",
+                type: "paragraph",
+                paragraph: {
+                    rich_text: [
+                        {
+                            type: "text",
+                            text: {
+                                content:
+                                    archDescSection ||
+                                    "No description provided",
+                            },
+                        },
+                    ],
+                },
+            },
+            {
+                //...other keys excluded
+                type: "heading_2",
+                //...other keys excluded
+                heading_2: {
+                    rich_text: [
+                        {
+                            type: "text",
+                            text: {
+                                content: "Architecture Diagram",
+                                link: null,
+                            },
+                        },
+                    ],
+                    color: "default",
+                    is_toggleable: false,
                 },
             },
             {
@@ -45,12 +157,45 @@ async function CreateNotionPage() {
                         {
                             type: "text",
                             text: {
-                                content:
-                                    "flowchart TD\nA[Christmas] -->|Get money| B(Go shopping)\nB --> C{Let me think}\nC -->|One| D[Laptop]\nC -->|Two| E[iPhone]\nC -->|Three| F[fa:fa-car Car]",
+                                content: archDiagramSection || "",
                             },
                         },
                     ],
                     language: "mermaid",
+                },
+            },
+            {
+                //...other keys excluded
+                type: "heading_2",
+                //...other keys excluded
+                heading_2: {
+                    rich_text: [
+                        {
+                            type: "text",
+                            text: {
+                                content: "Milestones",
+                                link: null,
+                            },
+                        },
+                    ],
+                    color: "default",
+                    is_toggleable: false,
+                },
+            },
+            {
+                object: "block",
+                type: "paragraph",
+                paragraph: {
+                    rich_text: [
+                        {
+                            type: "text",
+                            text: {
+                                content:
+                                    milestonesSection ||
+                                    "No milestones provided",
+                            },
+                        },
+                    ],
                 },
             },
         ],
