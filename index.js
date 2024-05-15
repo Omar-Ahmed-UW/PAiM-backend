@@ -3,9 +3,11 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
-const port = process.env.PORT || "8000";
+const port = process.env.PORT || "8080";
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -17,7 +19,7 @@ app.use("/api", require("./src/app.js"));
 app.get("/", (req, res) => res.status(200).send("PAiM Backend"));
 
 app.get("*", (req, res) => {
-  res.status(404).send("404 error!");
+    res.status(404).send("404 error!");
 });
 
 app.listen(port, () => console.log("Server running on port " + port));
