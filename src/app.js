@@ -94,7 +94,7 @@ async function HandleGeneratePage(req, res) {
             techStackSection,
             archDescSection,
             archDiagramSection,
-            "milestonesSection"
+            milestonesSection
         );
         res.status(200).send("Page created successfully");
         return;
